@@ -1,9 +1,10 @@
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// inuit-css Framework Ártico
+@import "~inuit-css";
 
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+//Template
+@import "template/header";
+

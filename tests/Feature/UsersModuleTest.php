@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class UsersModuleTest extends TestCase
 {
     /** @test */
-    public function it_load_users_list()
+    public function inicio()
     {
         $this->get('/')
         ->assertStatus(200)

@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        if ($this->command->confirm('¿Desea actualizar la migración antes seed, borrará todos los datos antiguos?')) {
+            $this->call(UserTableSeeder::class);
+        }
     }
+
 }

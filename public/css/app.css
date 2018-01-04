@@ -3178,7 +3178,3 @@ input[disabled]:hover {
   --font-family: 'Roboto',-apple-system, BlinkMacSystemFont, Avenir, "Avenir Next", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-body {
-  background-color: red;
-}
-

@@ -3161,26 +3161,21 @@ input[disabled]:hover {
 
 :root {
   --primary-color: #002c81;
-  --secondary-color: #5A6169;
-  --link-color: #538BF4;
-  --fontPrimary--color: #434343;
-  --lightGrey-color: #E9ECEF;
-  --darkGrey-color: #8FA4B8;
-  --dark-color: #5A6169;
-  --active-color: #007BFF;
-  --success-color: #17C671;
-  --warning-color: #FFB400;
-  --info-color: #00B8D8;
-  --error-color: #C4183C;
-  --grid-maxWidth: 1200px;
-  --grid-gutter: 1.6rem;
-  --grid-columns: 16;
-  --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --error-color: #de3131;
+}
+
+body {
+  font-weight: 300;
 }
 
 h1 {
   font-size: 3rem;
-  font-weight: bold;
+  font-weight: 400;
+  color: var(--primary-color);
+}
+
+h2 {
+  font-weight: 400;
   color: var(--primary-color);
 }
 
@@ -3188,6 +3183,10 @@ h3 {
   font-size: 2rem;
   font-weight: 400;
   color: var(--primary-color);
+}
+
+.error {
+  color: var(--error-color);
 }
 
 .message-home p {
@@ -3206,5 +3205,12 @@ h3 {
 
 .main-nav li {
   padding-left: 1.2rem;
+}
+
+.max-letter {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 

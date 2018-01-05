@@ -17,7 +17,7 @@ class CreatePointProductTable extends Migration
             $table->increments('id');
             $table->integer('sale_value');
             $table->integer('arrival');
-            $table->integer('amount_sale');
+            $table->integer('sale_amount');
             $table->date('date');
 
             //Key foreign

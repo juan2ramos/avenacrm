@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    use Authorizable;
+
     public function index()
     {
         $result = User::latest()->paginate();
+        dd($result);
         return view('user.index', compact('result'));
     }
 

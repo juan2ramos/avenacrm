@@ -1,10 +1,13 @@
-
 // inuit-css Framework Ártico
 @import "~inuit-css";
-
-// Variables
-@import "variables";
-
+// class general
+@import "general";
 //Template
-@import "template/header";
+@import "template/login";
 
+
+.main-nav{
+  li{
+    padding-left: 1.2rem;
+  }
+}

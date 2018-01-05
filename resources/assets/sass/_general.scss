@@ -1,0 +1,47 @@
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "small" {
+    @media (min-width: 36rem) {
+      @content
+    }
+  } @else if $breakpoint == "medium" {
+    @media (min-width: 45rem) {
+      @content
+    }
+  } @else if $breakpoint == "large" {
+    @media (min-width: 65rem) {
+      @content
+    }
+  }
+}
+
+:root {
+  --primary-color: #002c81;
+  --secondary-color: #5A6169;
+  --link-color: #538BF4;;
+  --fontPrimary--color: #434343;
+  --lightGrey-color: #E9ECEF;
+  --darkGrey-color: #8FA4B8;
+  --dark-color: #5A6169;
+  --active-color: #007BFF;
+  --success-color: #17C671;
+  --warning-color: #FFB400;
+  --info-color: #00B8D8;
+  --error-color: #C4183C;
+  --grid-maxWidth: 1200px; //Máximo tamaño del .container
+  --grid-gutter: 1.6rem;
+  --grid-columns: 16; //Número de columnas de la grilla
+  --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--primary-color);
+}
+    

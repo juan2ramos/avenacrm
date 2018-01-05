@@ -21,8 +21,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function adminHome()
     {
-        return view('home');
+        return view('home.home');
+    }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home()
+    {
+        if (auth()->check())
+            return redirect()->route('dashboard');
+        return view('home.index');
     }
 }

@@ -3160,7 +3160,7 @@ input[disabled]:hover {
 }
 
 :root {
-  --primary-color: #538BF4;
+  --primary-color: #002c81;
   --secondary-color: #5A6169;
   --link-color: #538BF4;
   --fontPrimary--color: #434343;
@@ -3175,6 +3175,36 @@ input[disabled]:hover {
   --grid-maxWidth: 1200px;
   --grid-gutter: 1.6rem;
   --grid-columns: 16;
-  --font-family: 'Roboto',-apple-system, BlinkMacSystemFont, Avenir, "Avenir Next", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--primary-color);
+}
+
+.message-home p {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.form-login {
+  height: calc(100vh - 300px);
+}
+
+.form-login div {
+  max-width: 50rem;
+  width: 100%;
+}
+
+.main-nav li {
+  padding-left: 1.2rem;
 }
 

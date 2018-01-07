@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use NumberFormatter;
 
-class ProductRequest extends FormRequest
+class PointRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +25,17 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
-            'description' => 'max:400',
-            'sale_value' => 'required'
+            'address' => 'max:100',
+            'area' => 'required'
         ];
     }
     public function messages()
     {
-        return [
-            'name.required' => 'El nombre es necesario para crear el producto',
-            'name.max' => 'La nombre no debe superar los 100 carateres',
-            'description.max' => 'La descripción no debe superar los 400 carateres',
-            'sale_value.required' => 'El valor  es necesario para crear el producto'
-        ];
+       return [
+         'name.required' => 'El nombre del punto es requerido',
+         'name.max' => 'El nombre no debe ser mayor a 100',
+         'address.max' => 'La dirección no debe ser mayor a 100',
+         'area_id.required' => 'La zona es requerida',
+       ];
     }
 }

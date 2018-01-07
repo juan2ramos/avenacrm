@@ -3189,6 +3189,27 @@ h3 {
   color: var(--error-color);
 }
 
+#deleteElement {
+  cursor: pointer;
+}
+
+.close {
+  cursor: pointer;
+  border-radius: 4rem;
+  border: .1rem solid aliceblue;
+  width: 2.4rem;
+  text-align: center;
+  line-height: 2.2rem;
+  height: 2.4rem;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.close:hover {
+  background: white;
+  color: var(--success-color);
+}
+
 .message-home p {
   font-size: 2rem;
   font-weight: 300;

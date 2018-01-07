@@ -1,6 +1,31 @@
+import {NumeralForm} from "./NumeralForm";
+import {DeleteAlert} from "./DeleteAlert";
 
 
-import NumeralForm from "./NumeralForm";
+NumeralForm(document.querySelectorAll('.money'));
 
-let nm = new NumeralForm(document.querySelector('.money'));
-console.log(nm.mover());
+document.querySelectorAll('input.error').forEach(function (e) {
+    e.addEventListener('change', function () {
+        this.classList.remove('error');
+        console.log(this);
+        this.nextSibling.nextSibling.remove();
+    })
+});
+
+document.querySelectorAll('.close').forEach(function (e) {
+    e.addEventListener('click', function () {
+        console.log(this.parentElement);
+        this.parentElement.remove();
+    })
+});
+
+document.querySelector('#deleteElement').addEventListener('click', function () {
+    DeleteAlert({
+        title: 'Estas seguro de eliminar?',
+        text: 'Recuerda que no podrás volver a recuperar la info',
+        formId: 'delete'
+    });
+});
+
+
+

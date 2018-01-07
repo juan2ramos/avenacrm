@@ -22,7 +22,7 @@
         <nav class="main-nav col-10">
             <ul class="row justify-center is-list-less">
                 <li><a href="{{route('productos.index')}}">Productos</a></li>
-                <li><a href="">Puntos</a></li>
+                <li><a href="{{route('puntos.index')}}">Puntos</a></li>
                 <li><a href="">Zonas</a></li>
                 <li><a href="">Usuarios</a></li>
                 <li><a href="">Inventario</a></li>

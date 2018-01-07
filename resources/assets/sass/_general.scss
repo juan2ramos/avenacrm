@@ -39,6 +39,25 @@ h3 {
   font-weight: 400;
   color: var(--primary-color);
 }
-.error{
+
+.error {
   color: var(--error-color);
+}
+#deleteElement{
+  cursor: pointer;
+}
+.close {
+  cursor: pointer;
+  border-radius: 4rem;
+  border: .1rem solid aliceblue;
+  width: 2.4rem;
+  text-align: center;
+  line-height: 2.2rem;
+  height: 2.4rem;
+  font-weight: 400;
+  font-size: 1.2rem;
+  &:hover{
+    background: white;
+    color: var(--success-color);
+  }
 }

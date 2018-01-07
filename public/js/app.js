@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(3);
+module.exports = __webpack_require__(5);
 
 
 /***/ }),
@@ -78,11 +78,17 @@ module.exports = __webpack_require__(3);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__NumeralForm__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DeleteAlert__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DeleteAlert__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ToggleShowPassword__ = __webpack_require__(15);
+
 
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__NumeralForm__["a" /* NumeralForm */])(document.querySelectorAll('.money'));
+Object(__WEBPACK_IMPORTED_MODULE_2__ToggleShowPassword__["a" /* ToggleShowPassword */])({
+    fieldId: 'password',
+    controlId: 'viewPassword'
+});
 
 document.querySelectorAll('input.error').forEach(function (e) {
     e.addEventListener('change', function () {
@@ -99,13 +105,16 @@ document.querySelectorAll('.close').forEach(function (e) {
     });
 });
 
-document.querySelector('#deleteElement').addEventListener('click', function () {
-    Object(__WEBPACK_IMPORTED_MODULE_1__DeleteAlert__["a" /* DeleteAlert */])({
-        title: 'Estas seguro de eliminar?',
-        text: 'Recuerda que no podrás volver a recuperar la info',
-        formId: 'delete'
+var deleteElement = document.querySelector('#deleteElement');
+if (deleteElement) {
+    deleteElement.addEventListener('click', function () {
+        Object(__WEBPACK_IMPORTED_MODULE_1__DeleteAlert__["a" /* DeleteAlert */])({
+            title: 'Estas seguro de eliminar?',
+            text: 'Recuerda que no podrás volver a recuperar la info',
+            formId: 'delete'
+        });
     });
-});
+}
 
 /***/ }),
 /* 2 */
@@ -117,7 +126,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var numeral = __webpack_require__(8);
+var numeral = __webpack_require__(3);
 
 var NumeralFormClass = function () {
     function NumeralFormClass(el) {
@@ -179,16 +188,6 @@ function NumeralForm(el) {
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
@@ -1211,6 +1210,64 @@ return numeral;
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = DeleteAlert;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var DeleteAlertClass = function () {
+    function DeleteAlertClass(settings) {
+        _classCallCheck(this, DeleteAlertClass);
+
+        this.settings = settings;
+        this.init();
+    }
+
+    _createClass(DeleteAlertClass, [{
+        key: "init",
+        value: function init() {
+            var _this = this;
+
+            console.log(this.settings);
+            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
+                title: this.settings.title,
+                text: this.settings.text,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    document.getElementById(_this.settings.formId).submit();
+                }
+            });
+        }
+    }]);
+
+    return DeleteAlertClass;
+}();
+
+function DeleteAlert(settings) {
+    new DeleteAlertClass(settings);
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 6 */,
+/* 7 */,
+/* 8 */,
 /* 9 */,
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1688,53 +1745,44 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 15 */,
-/* 16 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = DeleteAlert;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
+/* harmony export (immutable) */ __webpack_exports__["a"] = ToggleShowPassword;
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-
-
-var DeleteAlertClass = function () {
-    function DeleteAlertClass(settings) {
-        _classCallCheck(this, DeleteAlertClass);
+var ToggleShowPasswordClass = function () {
+    function ToggleShowPasswordClass(settings) {
+        _classCallCheck(this, ToggleShowPasswordClass);
 
         this.settings = settings;
         this.init();
     }
 
-    _createClass(DeleteAlertClass, [{
+    _createClass(ToggleShowPasswordClass, [{
         key: "init",
         value: function init() {
-            var _this = this;
 
-            console.log(this.settings);
-            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
-                title: this.settings.title,
-                text: this.settings.text,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then(function (willDelete) {
-                if (willDelete) {
-                    document.getElementById(_this.settings.formId).submit();
+            var x = document.getElementById(this.settings.fieldId);
+            document.getElementById(this.settings.controlId).addEventListener('click', function () {
+
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
                 }
             });
         }
     }]);
 
-    return DeleteAlertClass;
+    return ToggleShowPasswordClass;
 }();
 
-function DeleteAlert(settings) {
-    new DeleteAlertClass(settings);
+function ToggleShowPassword(settings) {
+    new ToggleShowPasswordClass(settings);
 }
 
 /***/ })

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Area extends Model
 {
+
+    protected $fillable = ['name'];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

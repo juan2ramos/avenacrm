@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PointRequest;
 use App\Models\Area;
 use App\Models\Point;
-use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
@@ -46,7 +45,6 @@ class PointController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Point $point
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -57,8 +55,9 @@ class PointController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Point $point
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Point $punto
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Point $punto)
     {
@@ -68,9 +67,10 @@ class PointController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Models\Point $point
+     * @param PointRequest|\Illuminate\Http\Request $request
+     * @param Point $punto
      * @return \Illuminate\Http\Response
+     * @internal param Point $point
      */
     public function update(PointRequest $request, Point $punto)
     {
@@ -90,6 +90,6 @@ class PointController extends Controller
     {
         $punto->delete();
 
-        return redirect()->route('puntos.index')->with('deletePoint',true);
+        return redirect()->route('puntos.index')->with('deletePoint', true);
     }
 }

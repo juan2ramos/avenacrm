@@ -1,8 +1,13 @@
 import {NumeralForm} from "./NumeralForm";
 import {DeleteAlert} from "./DeleteAlert";
+import {ToggleShowPassword} from "./ToggleShowPassword";
 
 
 NumeralForm(document.querySelectorAll('.money'));
+ToggleShowPassword({
+    fieldId: 'password',
+    controlId: 'viewPassword'
+});
 
 document.querySelectorAll('input.error').forEach(function (e) {
     e.addEventListener('change', function () {
@@ -19,13 +24,18 @@ document.querySelectorAll('.close').forEach(function (e) {
     })
 });
 
-document.querySelector('#deleteElement').addEventListener('click', function () {
-    DeleteAlert({
-        title: 'Estas seguro de eliminar?',
-        text: 'Recuerda que no podrás volver a recuperar la info',
-        formId: 'delete'
+const deleteElement = document.querySelector('#deleteElement');
+if (deleteElement) {
+    deleteElement.addEventListener('click', function () {
+        DeleteAlert({
+            title: 'Estas seguro de eliminar?',
+            text: 'Recuerda que no podrás volver a recuperar la info',
+            formId: 'delete'
+        });
     });
-});
+}
+
+
 
 
 

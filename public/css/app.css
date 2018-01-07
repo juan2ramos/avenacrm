@@ -3185,6 +3185,18 @@ h3 {
   color: var(--primary-color);
 }
 
+.password-view {
+  position: relative;
+}
+
+.password-view i {
+  position: absolute;
+  right: 1rem;
+  top: 3.4rem;
+  cursor: pointer;
+  fill: var(--success-color);
+}
+
 .error {
   color: var(--error-color);
 }

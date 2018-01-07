@@ -7,3 +7,9 @@ Route::resource('productos','ProductController',['names' => ['create' => 'produc
 
 Route::get('puntos/nuevo', 'PointController@create')->name('puntos.create');
 Route::resource('puntos','PointController',['names' => ['create' => 'puntos.nuevo']]);
+
+Route::get('zonas/nuevo', 'AreaController@create')->name('zonas.create');
+Route::resource('zonas','AreaController',['names' => ['create' => 'zonas.nuevo']]);
+
+Route::get('usuarios/nuevo', 'UserController@create')->name('usuarios.create');
+Route::resource('usuarios','UserController',['names' => ['create' => 'usuarios.nuevo']]);

@@ -2,11 +2,10 @@ import {NumeralForm} from "./NumeralForm";
 import {DeleteAlert} from "./DeleteAlert";
 import {ToggleShowPassword} from "./ToggleShowPassword";
 
-
 NumeralForm(document.querySelectorAll('.money'));
 ToggleShowPassword({
-    fieldId: 'password',
-    controlId: 'viewPassword'
+    fieldId: '#password',
+    controlId: '#viewPassword'
 });
 
 document.querySelectorAll('input.error').forEach(function (e) {

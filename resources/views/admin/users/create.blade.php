@@ -35,7 +35,7 @@
 
             <div class="m-t-24 password-view">
                 <label for="password">Contraseña</label>
-                <input name="password" type="password" value="{{old('password')}}" required
+                <input name="password" type="password"  required
                        class=" @if($errors->has('password')) error @endif " id="password">
                 @if ($errors->has('password'))<span class="error">{{ $errors->first('password') }}</span>@endif
                 <i id="viewPassword"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path d="M24 9C14 9 5.46 15.22 2 24c3.46 8.78 12 15 22 15s18.54-6.22 22-15C42.54 15.22 34.01 9 24 9zm0 25c-5.52 0-10-4.48-10-10s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10zm0-16c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"/></svg></i>
@@ -46,7 +46,7 @@
                 <select name="role" id="role" required>
                     <option value="">Elegir rol</option>
                     @foreach($roles as $key => $role)
-                        <option {{(old('rol') == $key)?'selected':''}} value="{{$key}}">{{$role}}</option>
+                        <option {{(old('role') == $key)?'selected':''}} value="{{$key}}">{{$role}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('role'))<span class="error">{{ $errors->first('role') }}</span>@endif

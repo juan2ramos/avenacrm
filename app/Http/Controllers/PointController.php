@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PointRequest;
 use App\Models\Area;
 use App\Models\Point;
+use App\Models\Product;
 
 class PointController extends Controller
 {
@@ -25,7 +26,10 @@ class PointController extends Controller
      */
     public function create()
     {
-        return view('admin.points.create', ['areas' => Area::pluck('name', 'id')]);
+        return view('admin.points.create', [
+            'areas' => Area::pluck('name', 'id'),
+            'products' => Product::all(),
+        ]);
     }
 
     /**
@@ -76,6 +80,7 @@ class PointController extends Controller
     {
         $area = Area::findOrFail($request->input('area'));
         $area->points()->save($punto->fill($request->validated()));
+
         return redirect()->back()->with('success', true);
     }
 

@@ -3222,6 +3222,24 @@ h3 {
   color: var(--success-color);
 }
 
+[type="checkbox"] + label {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  display: block;
+}
+
+@media (min-width: 45rem) {
+  #products-point .row:nth-child(2n) {
+    padding-left: 1rem;
+  }
+}
+
+@media (min-width: 45rem) {
+  #products-point .row:nth-child(2n-1) {
+    padding-right: 1rem;
+  }
+}
+
 .message-home p {
   font-size: 2rem;
   font-weight: 300;

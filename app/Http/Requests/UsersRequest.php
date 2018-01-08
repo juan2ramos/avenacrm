@@ -25,11 +25,11 @@ class UsersRequest extends FormRequest
     {
         $dataMethod = ($this->method() == 'POST') ?
             [
-                'email' => 'required|email|unique:users,email,' . session('userId'),
+                'email' => 'required|email|unique:users',
                 'password' => 'required|min:6'
             ] :
             [
-                'email' => 'required|email|unique:users',
+                'email' => 'required|email|unique:users,email,' . session('userId'),
                 'password' => 'nullable|min:6'
             ];
 

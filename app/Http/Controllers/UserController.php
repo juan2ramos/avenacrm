@@ -9,10 +9,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class UserController extends Controller
 {
-
     public function index()
     {
         return view('admin.users.index', ['users' => User::latest()->paginate()]);
@@ -28,72 +26,41 @@ class UserController extends Controller
         $request->merge(['password' => bcrypt($request->get('password'))]);
         $user = User::create($request->all());
         $user->assignRole($request->input('role'));
+
         return redirect()->route('usuarios.index');
     }
 
-    public function edit($id)
+    public function edit(User $usuario)
     {
-        $user = User::find($id);
-        $roles = Role::pluck('name', 'id');
-        $permissions = Permission::all('name', 'id');
+        Session()->flash('userId', $usuario->id);
 
-        return view('user.edit', compact('user', 'roles', 'permissions'));
+        return view('admin.users.edit', ['user' => $usuario, 'roles' => Role::pluck('name', 'id')]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UsersRequest $request, User $usuario)
     {
-        $this->validate($request, [
-            'name' => 'bail|required|min:2',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'roles' => 'required|min:1'
-        ]);
-
-        // Get the user
-        $user = User::findOrFail($id);
-
-        // Update user
-        $user->fill($request->except('roles', 'permissions', 'password'));
-
-        // check for password change
+        $usuario->fill($request->except('password'));
         if ($request->get('password')) {
-            $user->password = bcrypt($request->get('password'));
+            $usuario->password = bcrypt($request->get('password'));
         }
+        $usuario->syncRoles($request->input('role'));
+        $usuario->save();
 
-        // Handle the user roles
-        $this->syncPermissions($request, $user);
-
-        $user->save();
-        return redirect()->route('users.index');
+        return redirect()->back()->with('success', true);
     }
 
-    public function destroy($id)
+    /**
+     * @param \App\User $usuario
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy(User $usuario)
     {
-        if (Auth::user()->id == $id) {
-            return redirect()->back();
+        if (Auth::user()->id == session('userId')) {
+            return redirect()->back()->with('userMe', true);
         }
-        User::findOrFail($id)->delete();
-        return redirect()->back();
-    }
+        $usuario->delete();
 
-    private function syncPermissions(Request $request, $user)
-    {
-        // Get the submitted roles
-        $roles = $request->get('roles', []);
-        $permissions = $request->get('permissions', []);
-
-        // Get the roles
-        $roles = Role::find($roles);
-
-        // check for current role changes
-        if (!$user->hasAllRoles($roles)) {
-            // reset all direct permissions for user
-            $user->permissions()->sync([]);
-        } else {
-            // handle permissions
-            $user->syncPermissions($permissions);
-        }
-
-        $user->syncRoles($roles);
-        return $user;
+        return redirect()->route('usuarios.index')->with('deleteUser', true);
     }
 }

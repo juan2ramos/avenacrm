@@ -35,7 +35,23 @@
                     @endforeach
                 </select>
             </div>
-
+            <p class="m-t-32 m-b-12">Productos por punto</p>
+            <div class="row justify-around " id="products-point">
+                @foreach($products as $product)
+                    <div class="col-16 col-m-8 row  align-center">
+                        <div class="col-16 col-m-8 ">
+                            <input
+                                    id="product-{{$product->id}}"
+                                    {{ old('remember') ? 'checked' : '' }}
+                                    name="remember" type="checkbox">
+                            <label for="product-{{$product->id}}" class="p-r-12">{{$product->name}}</label><br>
+                        </div>
+                        <label class="col-16 col-m-8 ">
+                            <input  type="text" class="money" value="{{$product->sale_value}}">
+                        </label>
+                    </div>
+                @endforeach
+            </div>
             <div class="m-t-24">
                 <button class="is-full-width">Agregar punto</button>
             </div>

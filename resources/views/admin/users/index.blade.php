@@ -1,6 +1,6 @@
 @extends('layouts.general')
 @section('content')
-    @if(session('deletePoint'))
+    @if(session('deleteUser'))
         <div class="alert-success row justify-between ">
             Usuario eliminado
             <span class="close">x</span>

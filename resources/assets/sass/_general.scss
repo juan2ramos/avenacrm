@@ -40,9 +40,9 @@ h3 {
   color: var(--primary-color);
 }
 
-.password-view{
+.password-view {
   position: relative;
-  i{
+  i {
     position: absolute;
     right: 1rem;
     top: 3.4rem;
@@ -50,6 +50,7 @@ h3 {
     fill: var(--success-color)
   }
 }
+
 .error {
   color: var(--error-color);
 }
@@ -71,5 +72,22 @@ h3 {
   &:hover {
     background: white;
     color: var(--success-color);
+  }
+}
+
+[type="checkbox"] + label {
+  transform: translateX(0);
+  display: block;
+}
+#products-point{
+  .row:nth-child(2n){
+    @include respond-to(medium){
+      padding-left: 1rem;
+    }
+  }
+  .row:nth-child(2n-1){
+    @include respond-to(medium){
+      padding-right: 1rem;
+    }
   }
 }

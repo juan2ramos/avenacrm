@@ -6,6 +6,13 @@
             <span class="close">X</span>
         </div>
     @endif
+
+    @if(session('cantDelete'))
+        <div class="alert-warning row justify-between ">
+            No puedes eliminar el punto tiene productos asociados
+            <span class="close">x</span>
+        </div>
+    @endif
     @if(session('success'))
         <div class="alert-success row justify-between">
             El punto se ha actualizado correctamente
@@ -50,7 +57,7 @@
             </div>
 
             <div class="m-t-24">
-                <label for="area">Area</label>
+                <label for="area">Zona</label>
                 <select name="area" id="area" required>
                     <option value="">Elegir Zona</option>
                     @php($option = old('area')?old('area'):$point->area_id)
@@ -61,6 +68,49 @@
                 @if ($errors->has('area'))<span class="error">{{ $errors->first('area') }}</span>@endif
             </div>
 
+            <p class="m-t-32 m-b-12">Productos por punto</p>
+            <div class="row justify-around " id="products-point">
+
+                @foreach($products as $product)
+                    <div class="col-16 col-m-8 row  align-center">
+                        <div class="col-16 col-m-8 ">
+                            <input
+                                    {{ old("products.$product->id") ||
+                                        $point->products->contains($product->id) ?'checked':''
+                                    }}
+                                    id="products{{$product->id}}"
+                                    name="products[{{$product->id}}]"
+                                    type="checkbox"
+                                    value="{{$product->id}}"
+                                    class="productsPoint"
+                                    data-enable="sale_value{{$product->id}}"
+                            >
+                            <label for="products{{$product->id}}" class="p-r-12">{{$product->name}}</label><br>
+                        </div>
+                        <label class="col-16 col-m-8 ">
+                            <input
+                                    id="sale_value{{$product->id}}"
+                                    name="products[{{$product->id}}][sale_value]"
+                                    type="text"
+                                    class="money"
+
+                                    value="{{
+                                    old("product.$product->id.id")
+                                    ?old("product.$product->id.sale_value")
+                                    :(
+                                        ($point->products->contains($product->id))
+                                        ?$point->products->where('id',$product->id)->first()->point_sale_value
+                                        :$product->sale_value
+                                    )}}"
+                                    {{old("products.$product->id") ||  $point->products->contains($product->id)
+                                        ?'':'disabled'
+                                    }}
+                            >
+                        </label>
+
+                    </div>
+                @endforeach
+            </div>
             <div class="m-t-24">
                 <button class="is-full-width">Actualizar punto</button>
             </div>

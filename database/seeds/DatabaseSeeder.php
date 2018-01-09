@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AreasSeeder::class);
         $this->call(PointsSeeder::class);
         $this->call(ProductSeeder::class);
+        $this->call(InventoriesSeeder::class);
     }
 
 }

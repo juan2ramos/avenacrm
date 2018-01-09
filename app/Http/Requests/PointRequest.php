@@ -26,16 +26,19 @@ class PointRequest extends FormRequest
         return [
             'name' => 'required|max:100',
             'address' => 'max:100',
-            'area' => 'required'
+            'area' => 'required',
+            'product.*.sale_value' => 'required_with:product.*.id',
         ];
     }
+
     public function messages()
     {
-       return [
-         'name.required' => 'El nombre del punto es requerido',
-         'name.max' => 'El nombre no debe ser mayor a 100',
-         'address.max' => 'La dirección no debe ser mayor a 100',
-         'area_id.required' => 'La zona es requerida',
-       ];
+        return [
+            'name.required' => 'El nombre del punto es requerido',
+            'name.max' => 'El nombre no debe ser mayor a 100',
+            'address.max' => 'La dirección no debe ser mayor a 100',
+            'area.required' => 'La zona es requerida',
+            'product.*.sale_value.required' => 'El producto seleccionado debe contener un valor ',
+        ];
     }
 }

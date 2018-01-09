@@ -13,3 +13,6 @@ Route::resource('zonas','AreaController',['names' => ['create' => 'zonas.nuevo']
 
 Route::get('usuarios/nuevo', 'UserController@create')->name('usuarios.create');
 Route::resource('usuarios','UserController',['names' => ['create' => 'usuarios.nuevo']]);
+
+Route::get('inventarios/nuevo', 'InventoryController@create')->name('inventarios.create');
+Route::resource('inventarios','InventoryController',['names' => ['create' => 'inventarios.nuevo']]);

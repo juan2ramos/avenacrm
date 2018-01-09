@@ -21,4 +21,11 @@ class Point extends Model
     {
         return $this->belongsTo(Area::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'point_product_base')
+            ->withPivot('sale_value')
+            ->as('stock');
+    }
 }

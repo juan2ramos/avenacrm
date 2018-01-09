@@ -14,7 +14,27 @@ class Product extends Model
 {
     protected $fillable = ['name', 'sale_value', 'description'];
 
+    public function points()
+    {
+        return $this->belongsToMany(Point::class, 'point_product_base')
+            ->withPivot('sale_value')->as('stock');
+    }
+
+    public function inventory(){
+        return $this->hasMany(Inventory::class);
+    }
+
+    public function getPointSaleValueAttribute()
+    {
+        return $this->moneyFormat($this->stock->sale_value);
+    }
+
     public function getSaleValueAttribute($value)
+    {
+        return $this->moneyFormat($value);
+    }
+
+    private function moneyFormat($value)
     {
         setlocale(LC_MONETARY, 'en_US');
         return money_format('%n', $value);

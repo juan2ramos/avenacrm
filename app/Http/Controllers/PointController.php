@@ -6,6 +6,7 @@ use App\Http\Requests\PointRequest;
 use App\Models\Area;
 use App\Models\Point;
 use App\Models\Product;
+use App\Models\ProductPointBase;
 
 class PointController extends Controller
 {
@@ -40,10 +41,32 @@ class PointController extends Controller
      */
     public function store(PointRequest $request)
     {
-        $area = Area::findOrFail($request->input('area'));
-        $area->points()->save(new Point($request->all()));
+        $point = $this->savePoint($request->all());
+        $this->saveProductsPoint($point, $request->input('products'));
 
         return redirect()->route('puntos.index');
+    }
+
+    /**
+     * @param $data
+     * @param $point
+     * @return Point
+     */
+    private function savePoint($data, $point = null)
+    {
+        $point = ($point) ? $point->fill($data) : new Point($data);
+        Area::findOrFail($data['area'])->points()->save($point);
+        return $point;
+    }
+
+    /**
+     * @param $point
+     * @param $products
+     */
+    private function saveProductsPoint($point, $products)
+    {
+        $productsPoint = ProductPointBase::valueFormat($products);
+        $point->products()->sync($productsPoint);
     }
 
     /**
@@ -65,7 +88,11 @@ class PointController extends Controller
      */
     public function edit(Point $punto)
     {
-        return view('admin.points.edit', ['point' => $punto, 'areas' => Area::pluck('name', 'id')]);
+        return view('admin.points.edit', [
+            'point' => $punto->load('products'),
+            'areas' => Area::pluck('name', 'id'),
+            'products' => Product::with('points')->get(),
+        ]);
     }
 
     /**
@@ -78,8 +105,8 @@ class PointController extends Controller
      */
     public function update(PointRequest $request, Point $punto)
     {
-        $area = Area::findOrFail($request->input('area'));
-        $area->points()->save($punto->fill($request->validated()));
+        $this->savePoint($request->all(), $punto);
+        $this->saveProductsPoint($punto, $request->input('products'));
 
         return redirect()->back()->with('success', true);
     }
@@ -93,8 +120,10 @@ class PointController extends Controller
      */
     public function destroy(Point $punto)
     {
-        $punto->delete();
-
-        return redirect()->route('puntos.index')->with('deletePoint', true);
+        if ($punto->products->isEmpty()) {
+            $punto->delete();
+            return redirect()->route('puntos.index')->with('deletePoint', true);
+        }
+        return redirect()->back()->with('cantDelete', true);
     }
 }

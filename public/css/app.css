@@ -3164,6 +3164,12 @@ input[disabled]:hover {
   --error-color: #de3131;
 }
 
+[type="checkbox"] + label {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  display: block;
+}
+
 body {
   font-weight: 300;
 }
@@ -3220,12 +3226,6 @@ h3 {
 .close:hover {
   background: white;
   color: var(--success-color);
-}
-
-[type="checkbox"] + label {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  display: block;
 }
 
 @media (min-width: 45rem) {

@@ -1,10 +1,9 @@
 // inuit-css Framework Ártico
 @import "~inuit-css";
 // class general
-@import "general";
+@import "template/general";
 //Template
 @import "template/login";
-
 
 .main-nav{
   li{

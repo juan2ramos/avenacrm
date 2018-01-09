@@ -25,7 +25,7 @@
                 <li><a href="{{route('puntos.index')}}">Puntos</a></li>
                 <li><a href="{{route('zonas.index')}}">Zonas</a></li>
                 <li><a href="{{route('usuarios.index')}}">Usuarios</a></li>
-                <li><a href="">Inventario</a></li>
+                <li><a href="{{route('inventarios.index')}}">Inventario</a></li>
             </ul>
         </nav>
     @else

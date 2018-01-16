@@ -1,5 +1,5 @@
 <?php
-Route::get('/', 'Homecontroller@home');
+Route::get('/', 'HomeController@home');
 Auth::routes();
 
 Route::get('logout', function () {

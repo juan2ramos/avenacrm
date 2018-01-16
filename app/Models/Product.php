@@ -39,6 +39,9 @@ class Product extends Model
         setlocale(LC_MONETARY, 'en_US');
         return money_format('%n', $value);
     }
+    public function getSaleValueFormatAttribute(){
+        return intval(preg_replace('/[^0-9]+/', '', substr($this->sale_value, 0, -2)), 10);
+    }
 
     public function setSaleValueAttribute($value)
     {

@@ -1,6 +1,6 @@
 <?php
 Route::get('/', 'HomeController@adminHome')->name('dashboard');
-Route::get('/usuarios', 'UserController@index')->name('users')->middleware('permission:view_user');
+Route::get('/usuarios', 'UserController@index')->name('users');
 
 Route::get('productos/nuevo', 'ProductController@create')->name('productos.create');
 Route::resource('productos','ProductController',['names' => ['create' => 'product.create']]);
@@ -16,3 +16,6 @@ Route::resource('usuarios','UserController',['names' => ['create' => 'usuarios.n
 
 Route::get('inventarios/nuevo', 'InventoryController@create')->name('inventarios.create');
 Route::resource('inventarios','InventoryController',['names' => ['create' => 'inventarios.nuevo']]);
+
+Route::get('asignar/{user}','UserController@assign')->name('assign');
+Route::post('asignar','UserController@assignCreate')->name('assign.create');

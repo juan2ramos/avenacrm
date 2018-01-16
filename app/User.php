@@ -2,10 +2,14 @@
 
 namespace App;
 
+use App\Models\Point;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @property mixed $assign
+ */
 class User extends Authenticatable
 {
     use Notifiable, HasRoles;
@@ -27,4 +31,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function assign(){
+        return $this->hasOne(Point::class,'user_id');
+    }
+
+
 }

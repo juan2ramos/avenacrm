@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AreaRequest extends FormRequest
+class PointProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,17 @@ class AreaRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:100'
+            'products.*.available' => 'required|numeric',
+            'products.*.sold' => 'required|numeric'
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'El nombre es requerido',
-            'name.max' => 'El nombre no debe ser mayor a 100'
+            'products.*.available.required' => 'El elemento es requerido',
+            'products.*.available.numeric' => 'Debe ser un número',
+            'products.*.sold.required' => 'El elemento es requerido',
+            'products.*.sold.numeric' => 'Debe ser un número',
         ];
     }
 }

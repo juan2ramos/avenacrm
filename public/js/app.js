@@ -165,6 +165,18 @@ if (deleteElement) {
     });
 }
 
+var formInsertProductPoint = document.querySelector('#formInsertProductPoint');
+if (formInsertProductPoint) {
+    formInsertProductPoint.addEventListener('submit', function (e) {
+        e.preventDefault();
+        Object(__WEBPACK_IMPORTED_MODULE_1__DeleteAlert__["a" /* DeleteAlert */])({
+            title: 'Estas seguro?',
+            text: 'Recuerda que no podrás volver a ingresar la información',
+            formId: 'formInsertProductPoint'
+        });
+    });
+}
+
 document.querySelectorAll('input.error,select.error').forEach(function (e) {
     e.addEventListener('change', function () {
         this.classList.remove('error');
@@ -1300,7 +1312,6 @@ var DeleteAlertClass = function () {
         value: function init() {
             var _this = this;
 
-            console.log(this.settings);
             __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
                 title: this.settings.title,
                 text: this.settings.text,

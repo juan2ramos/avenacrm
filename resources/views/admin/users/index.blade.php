@@ -6,6 +6,12 @@
             <span class="close">x</span>
         </div>
     @endif
+    @if(session('assign'))
+        <div class="alert-success row justify-between ">
+            Usuario asignado
+            <span class="close">x</span>
+        </div>
+    @endif
     <div class="m-t-20 m-b-40">
         <h2>Usuarios</h2>
         <a href="{{route('usuarios.create')}}">
@@ -26,6 +32,7 @@
                 <th>Nombre</th>
                 <th>email</th>
                 <th>Rol</th>
+                <th class="is-text-center">Asignar</th>
                 <th class="is-text-center">Acciones</th>
             </tr>
             </thead>
@@ -36,7 +43,12 @@
                     <td>{{$user->name . ' ' . $user->last_name}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{ optional($user->roles->first())->name}}</td>
-                    <td>
+                    <td class="is-text-center">
+                        @if($user->roles->first()->name == 'Auxiliar')
+                            <a class="p-l-24" href="{{route('assign',$user->id)}}">Asignar Punto</a>
+                        @endif
+                    </td>
+                    <td class="row justify-center">
                         <a class="row align-center justify-center" href="{{route('usuarios.edit',$user->id)}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
                                 <path fill="#538BF4"

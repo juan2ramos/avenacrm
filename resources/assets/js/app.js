@@ -23,6 +23,18 @@ if (deleteElement) {
     });
 }
 
+const formInsertProductPoint = document.querySelector('#formInsertProductPoint');
+if (formInsertProductPoint) {
+    formInsertProductPoint.addEventListener('submit', function (e) {
+        e.preventDefault();
+        DeleteAlert({
+            title: 'Estas seguro?',
+            text: 'Recuerda que no podrás volver a ingresar la información',
+            formId: 'formInsertProductPoint'
+        });
+    });
+}
+
 document.querySelectorAll('input.error,select.error').forEach(function (e) {
     e.addEventListener('change', function () {
         this.classList.remove('error');

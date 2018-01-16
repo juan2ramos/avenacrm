@@ -8,7 +8,6 @@ class DeleteAlertClass {
     }
 
     init() {
-        console.log(this.settings);
         swal({
             title: this.settings.title,
             text: this.settings.text,

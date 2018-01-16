@@ -16,8 +16,8 @@ class CreatePointProductTable extends Migration
         Schema::create('point_product', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sale_value');
-            $table->integer('arrival');
-            $table->integer('sale_amount');
+            $table->integer('available');
+            $table->integer('sold');
             $table->date('date');
 
             //Key foreign

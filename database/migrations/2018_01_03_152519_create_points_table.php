@@ -19,6 +19,8 @@ class CreatePointsTable extends Migration
             $table->string('address')->nullable();
 
 
+            $table->integer('user_id')->unsigned()->nullable();
+
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->references('id')->on('areas');
 

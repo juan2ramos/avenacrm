@@ -18,7 +18,7 @@
             <a href="/"><img width="200px" src="{{asset('images/logo.png')}}" alt=""></a>
         </figure>
     </div>
-    @if(auth()->check())
+    @if(auth()->check() && auth()->user()->hasRole('Admin'))
         <nav class="main-nav col-10">
             <ul class="row justify-center is-list-less">
                 <li><a href="{{route('productos.index')}}">Productos</a></li>

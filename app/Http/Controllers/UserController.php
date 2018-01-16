@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersRequest;
 use App\Models\Permission;
+use App\Models\Point;
 use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('admin.users.index', ['users' => User::latest()->paginate()]);
+        return view('admin.users.index', ['users' => User::with('roles')->paginate()]);
     }
 
     public function create()
@@ -62,5 +63,22 @@ class UserController extends Controller
         $usuario->delete();
 
         return redirect()->route('usuarios.index')->with('deleteUser', true);
+    }
+
+    public function assign(User $user)
+    {
+        Session()->flash('userId', $user->id);
+
+        return view('admin.users.assign', ['user' => $user->load('assign'), 'points' => Point::pluck('name', 'id')]);
+    }
+
+    public function assignCreate(Request $request)
+    {
+
+        $point = Point::findOrFail($request->input('point'));
+        $point->user_id = session('userId');
+        $point->save();
+
+        return redirect()->route('usuarios.index')->with('assign', true);
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Point;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,6 +17,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        setlocale(LC_TIME, 'es_ES');
     }
 
     /**
@@ -25,6 +29,7 @@ class HomeController extends Controller
     {
         return view('home.home');
     }
+
     /**
      * Show the application dashboard.
      *
@@ -32,8 +37,30 @@ class HomeController extends Controller
      */
     public function home()
     {
-        if (auth()->check())
-            return redirect()->route('dashboard');
-        return view('home.index');
+        $route = auth()->user()->hasRole('Admin') ? 'dashboard' : 'homePoint';
+
+        return redirect()->route($route);
+    }
+
+    public function homePoint()
+    {
+        $products = auth()->user()->assign->stockDay;
+        if (!$products->isEmpty()) {
+            return view('home.point', [
+                'products' => $products,
+                'productsAvailable' => auth()->user()->assign->productsAvailable,
+                'day' => 'hoy',
+                'date' => Carbon::now()->formatLocalized('%A %d de %B %Y'),
+
+            ]);
+        }
+
+        return view('home.point', [
+            'products' => auth()->user()->assign->stockYesterday,
+            'productsAvailable' => auth()->user()->assign->productsAvailable,
+            'day' => 'ayer',
+            'date' => Carbon::yesterday()->formatLocalized('%A %d de %B %Y'),
+            'today' => Carbon::today()->formatLocalized('%A %d de %B %Y'),
+        ]);
     }
 }

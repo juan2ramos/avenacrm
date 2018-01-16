@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PointProductRequest;
 use App\Http\Requests\PointRequest;
 use App\Models\Area;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\ProductPointBase;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
@@ -56,6 +59,7 @@ class PointController extends Controller
     {
         $point = ($point) ? $point->fill($data) : new Point($data);
         Area::findOrFail($data['area'])->points()->save($point);
+
         return $point;
     }
 
@@ -122,8 +126,29 @@ class PointController extends Controller
     {
         if ($punto->products->isEmpty()) {
             $punto->delete();
+
             return redirect()->route('puntos.index')->with('deletePoint', true);
         }
+
         return redirect()->back()->with('cantDelete', true);
+    }
+
+    public function pointProductUpdate(PointProductRequest $request)
+    {
+        $data = $this->dataPointProduct($request->input('products'));
+        auth()->user()->assign->productsPoint()->attach($data);
+
+        return back()->with('pointProductUpdate', true);
+    }
+
+    private function dataPointProduct($dataPointProducts)
+    {
+        $products = Product::all();
+        foreach ($dataPointProducts as $key => $dataPointProduct) {
+            $dataPointProducts[$key]['sale_value'] = $products->find($key)->sale_value_format;
+            $dataPointProducts[$key]['date'] = Carbon::today()->toDateString();
+        }
+
+        return $dataPointProducts;
     }
 }

@@ -1,4 +1,4 @@
-const numeral = require('numeral');
+    const numeral = require('numeral');
 
 class NumeralFormClass {
 

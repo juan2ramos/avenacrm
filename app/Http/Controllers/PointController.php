@@ -151,4 +151,20 @@ class PointController extends Controller
 
         return $dataPointProducts;
     }
+
+    public function pointDetailToday(Point $point)
+    {
+        Session()->flash('pointId', $point->id);
+
+        return view('admin.points.pointProductDetail', ['point' => $point->load('stockDay')]);
+    }
+
+    public function pointDetailTodayUpdate(PointProductRequest $request)
+    {
+        $data = $this->dataPointProduct($request->input('products'));
+        $point = Point::findOrFail(session('pointId'));
+        $point->productsPoint()->sync($data);
+
+        return back()->with('pointProductUpdate', true);
+    }
 }

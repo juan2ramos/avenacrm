@@ -27,7 +27,13 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('home.home');
+
+        return view('home.home',
+            [
+                'points' => Point::has('stockDay')->get(),
+                'today' => Carbon::now()->formatLocalized('%A %d de %B %Y'),
+                'pointAll' => Point::count()
+            ]);
     }
 
     /**

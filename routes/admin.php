@@ -19,3 +19,6 @@ Route::resource('inventarios','InventoryController',['names' => ['create' => 'in
 
 Route::get('asignar/{user}','UserController@assign')->name('assign');
 Route::post('asignar','UserController@assignCreate')->name('assign.create');
+
+Route::get('detalle-punto/{point}','PointController@pointDetailToday')->name('pointDetailToday');
+Route::post('pointDetailToday', 'PointController@pointDetailTodayUpdate')->name('pointDetailToday.update');

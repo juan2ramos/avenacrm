@@ -45,7 +45,9 @@
                     <td>{{ optional($user->roles->first())->name}}</td>
                     <td class="is-text-center">
                         @if($user->roles->first()->name == 'Auxiliar')
-                            <a class="p-l-24" href="{{route('assign',$user->id)}}">Asignar Punto</a>
+                            <a class="p-l-24" href="{{route('assign',$user->id)}}">
+                                {{($user->assign)?$user->assign->name:'Asignar Punto'}}
+                            </a>
                         @endif
                     </td>
                     <td class="row justify-center">

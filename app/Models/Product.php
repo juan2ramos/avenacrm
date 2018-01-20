@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    protected $fillable = ['name', 'sale_value', 'description'];
+    protected $fillable = ['name', 'sale_value', 'description','see_description'];
+    protected $casts = [
+        'see_description' => 'boolean',
+    ];
 
     public function points()
     {

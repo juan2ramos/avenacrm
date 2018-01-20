@@ -30,6 +30,18 @@
                 <textarea name="description" id="description"></textarea>
             </div>
 
+            <div class="col-16 col-m-8 ">
+                <input
+                        {{ old("see_description")  ?'checked':'' }}
+                        id="see_description"
+                        name="see_description"
+                        type="checkbox"
+                        value="{{}}"
+                        class="productsPoint"
+                >
+                <label for="see_description" class="p-r-12">Ver descripción</label><br>
+            </div>
+
             <div class="m-t-24">
                 <button class="is-full-width">Agregar producto</button>
             </div>

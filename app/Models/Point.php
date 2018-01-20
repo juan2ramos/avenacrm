@@ -48,4 +48,9 @@ class Point extends Model
     {
         return $this->belongsToMany(Product::class)->withPivot('sold', 'available', 'sale_value');
     }
+
+    public function productsPointDate($date)
+    {
+        return $this->belongsToMany(Product::class)->withPivot('date', 'sale_value', 'available', 'sold')->wherePivot('date', $date);
+    }
 }

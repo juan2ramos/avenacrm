@@ -9,7 +9,6 @@ use App\Models\Point;
 use App\Models\Product;
 use App\Models\ProductPointBase;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
@@ -155,6 +154,7 @@ class PointController extends Controller
     public function pointDetailToday(Point $point)
     {
         Session()->flash('pointId', $point->id);
+        Session()->flash('date', Carbon::today()->toDateString());
 
         return view('admin.points.pointProductDetail', ['point' => $point->load('stockDay')]);
     }
@@ -163,7 +163,7 @@ class PointController extends Controller
     {
         $data = $this->dataPointProduct($request->input('products'));
         $point = Point::findOrFail(session('pointId'));
-        $point->productsPoint()->sync($data);
+        $point->productsPointDate(session('date'))->sync($data);
 
         return back()->with('pointProductUpdate', true);
     }

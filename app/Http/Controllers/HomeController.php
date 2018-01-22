@@ -27,12 +27,9 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        session()->flash('date',Carbon::now()->toDateString());
-        return view('home.home', [
-                'points' => Point::has('stockDay')->get(),
-                'today' => Carbon::now()->formatLocalized('%A %d de %B %Y'),
-                'pointAll' => Point::count(),
-            ]);
+        $pc = new PointController();
+        return $pc->pointDetailDate(Carbon::now()->toDateString());
+
     }
 
     /**

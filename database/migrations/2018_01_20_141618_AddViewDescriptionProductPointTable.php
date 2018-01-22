@@ -13,7 +13,7 @@ class AddViewDescriptionProductPointTable extends Migration
      */
     public function up()
     {
-        Schema::table('Products', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->tinyInteger('see_description')->default(0);
         });
     }
@@ -25,7 +25,7 @@ class AddViewDescriptionProductPointTable extends Migration
      */
     public function down()
     {
-        Schema::table('Product', function (Blueprint $table) {
+        Schema::table('product', function (Blueprint $table) {
             $table->dropColumn('see_description');
         });
     }

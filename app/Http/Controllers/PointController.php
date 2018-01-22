@@ -176,15 +176,18 @@ class PointController extends Controller
         $data = $this->dataPointProduct($request->input('products'), session('date'));
         $point = Point::findOrFail(session('pointId'));
         $point->productsPointDate(session('date'))->sync($data);
+
         return back()->with('pointProductUpdate', true);
     }
 
     public function pointDetailDate($date)
     {
 
-        $points = Point::with([
+        $points = Point::whereHas('pointProduct', function ($q) use ($date) {
+            return $q->where('date', $date);
+        })->with([
             'pointProduct' => function ($q) use ($date) {
-                $q->where('date', $date);
+                return $q->where('date', $date);
             },
         ])->get()->each(function ($item) {
             $item->sum = money_format('%n', $item->pointProduct->sum('value_total'));

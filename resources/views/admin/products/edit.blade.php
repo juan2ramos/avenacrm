@@ -58,6 +58,17 @@
                 <textarea name="description" id="description"
                 >{{old('description')?'description':$product->description}}</textarea>
             </div>
+            <div class="col-16 col-m-8 ">
+                <input
+                        {{ old("see_description",$product->see_description)  ?'checked':'' }}
+                        id="see_description"
+                        name="see_description"
+                        type="checkbox"
+                        value="1"
+                        class="productsPoint"
+                >
+                <label for="see_description" class="p-r-12">Mostrar la descripción para el punto de venta</label><br>
+            </div>
 
             <div class="m-t-24">
                 <button class="is-full-width">Actualizar producto</button>

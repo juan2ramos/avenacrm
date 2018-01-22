@@ -3254,6 +3254,10 @@ h3 {
   width: 100%;
 }
 
+input.cur-year {
+  padding: 0 !important;
+}
+
 .main-nav li {
   padding-left: 1.2rem;
 }

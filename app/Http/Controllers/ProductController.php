@@ -33,6 +33,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         Product::create($request->all());
+
         return redirect()->route('productos.index');
     }
 
@@ -68,6 +69,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $producto)
     {
         $producto->fill($request->validated())->save();
+
         return redirect()->back()->with('success', true);
     }
 
@@ -81,6 +83,7 @@ class ProductController extends Controller
     public function destroy(Product $producto)
     {
         $producto->delete();
+
         return redirect()->route('productos.index')->with('deleteProduct', true);
     }
 }

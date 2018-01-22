@@ -27,7 +27,8 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|max:100',
             'description' => 'max:400',
-            'sale_value' => 'required'
+            'sale_value' => 'required',
+            'see_description' => ''
         ];
     }
     public function messages()

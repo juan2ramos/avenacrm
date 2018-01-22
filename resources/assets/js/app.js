@@ -3,6 +3,12 @@ import {DeleteAlert} from "./DeleteAlert";
 import {ToggleShowPassword} from "./ToggleShowPassword";
 import {EnableField} from "./EnableField";
 
+import flatPicker from "flatpickr";
+import {Spanish} from "flatpickr/dist/l10n/es.js"
+
+flatPicker.localize(require('flatpickr/dist/themes/airbnb.css'));
+
+
 EnableField('productsPoint');
 
 NumeralForm(document.querySelectorAll('.money'));
@@ -45,12 +51,29 @@ document.querySelectorAll('input.error,select.error').forEach(function (e) {
 
 document.querySelectorAll('.close').forEach(function (e) {
     e.addEventListener('click', function () {
-        console.log(this.parentElement);
         this.parentElement.remove();
     })
 });
 
 
+const dateInput = document.querySelector('#date');
+if (dateInput) {
+    flatPicker(dateInput, {
+        "locale": Spanish // locale for this instance only
+    });
+}
+
+const formPointDate = document.querySelector('#form-points-date');
+if (formPointDate) {
+    formPointDate.addEventListener('click', function (e) {
+        e.preventDefault();
+        let date = document.getElementById('date').value;
+        if (date !== '') {
+            this.setAttribute('action', this.getAttribute('action').replace('date', date));
+            this.submit();
+        }
+    })
+}
 
 
 

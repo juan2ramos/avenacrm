@@ -46,11 +46,16 @@ class Point extends Model
 
     public function productsPoint()
     {
-        return $this->belongsToMany(Product::class)->withPivot('sold', 'available', 'sale_value');
+        return $this->belongsToMany(Product::class)->withPivot('sold', 'date', 'available', 'sale_value')->as('stock');
     }
 
     public function productsPointDate($date)
     {
         return $this->belongsToMany(Product::class)->withPivot('date', 'sale_value', 'available', 'sold')->wherePivot('date', $date);
+    }
+
+    public function pointProduct()
+    {
+        return $this->hasMany(PointProduct::class);
     }
 }

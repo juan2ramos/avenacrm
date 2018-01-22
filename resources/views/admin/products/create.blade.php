@@ -36,10 +36,10 @@
                         id="see_description"
                         name="see_description"
                         type="checkbox"
-                        value="{{}}"
+                        value="1"
                         class="productsPoint"
                 >
-                <label for="see_description" class="p-r-12">Ver descripción</label><br>
+                <label for="see_description" class="p-r-12">Mostrar la descripción para el punto de venta</label><br>
             </div>
 
             <div class="m-t-24">

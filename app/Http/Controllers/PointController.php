@@ -6,12 +6,19 @@ use App\Http\Requests\PointProductRequest;
 use App\Http\Requests\PointRequest;
 use App\Models\Area;
 use App\Models\Point;
+use App\Models\PointProduct;
 use App\Models\Product;
 use App\Models\ProductPointBase;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\Request;
 
 class PointController extends Controller
 {
+    public function __construct()
+    {
+        setlocale(LC_MONETARY, 'en_US');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -140,31 +147,54 @@ class PointController extends Controller
         return back()->with('pointProductUpdate', true);
     }
 
-    private function dataPointProduct($dataPointProducts)
+    private function dataPointProduct($dataPointProducts, $date = false)
     {
         $products = Product::all();
+        $date = ($date) ? $date : Carbon::today()->toDateString();
         foreach ($dataPointProducts as $key => $dataPointProduct) {
             $dataPointProducts[$key]['sale_value'] = $products->find($key)->sale_value_format;
-            $dataPointProducts[$key]['date'] = Carbon::today()->toDateString();
+            $dataPointProducts[$key]['date'] = $date;
         }
 
         return $dataPointProducts;
     }
 
-    public function pointDetailToday(Point $point)
+    public function pointDetailToday(Point $point, $date)
     {
-        Session()->flash('pointId', $point->id);
-        Session()->flash('date', Carbon::today()->toDateString());
 
-        return view('admin.points.pointProductDetail', ['point' => $point->load('stockDay')]);
+        Session()->flash('pointId', $point->id);
+        Session()->flash('date', $date);
+
+        return view('admin.points.pointProductDetail', [
+            'products' => $point->productsPointDate(session('date'))->get(),
+            'point' => $point,
+        ]);
     }
 
     public function pointDetailTodayUpdate(PointProductRequest $request)
     {
-        $data = $this->dataPointProduct($request->input('products'));
+        $data = $this->dataPointProduct($request->input('products'), session('date'));
         $point = Point::findOrFail(session('pointId'));
         $point->productsPointDate(session('date'))->sync($data);
-
         return back()->with('pointProductUpdate', true);
+    }
+
+    public function pointDetailDate($date)
+    {
+
+        $points = Point::with([
+            'pointProduct' => function ($q) use ($date) {
+                $q->where('date', $date);
+            },
+        ])->get()->each(function ($item) {
+            $item->sum = money_format('%n', $item->pointProduct->sum('value_total'));
+        });
+        session()->flash('date', $date);
+
+        return view('home.home', [
+            'points' => $points,
+            'today' => $date,
+            'pointAll' => Point::count(),
+        ]);
     }
 }

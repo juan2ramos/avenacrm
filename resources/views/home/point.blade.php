@@ -21,6 +21,7 @@
                 <div class="col-4 p-l-l8">
                     <h3>{{$product->name}}</h3>
                     <p><b>Disponible: </b> {{$product->pivot->available}}</p>
+                    @if($product->see_description)<p>{{$product->description}}</p> @endif
                     <p><b>Vendidos: </b> {{$product->pivot->sold}}</p>
                 </div>
             @endforeach
@@ -35,7 +36,6 @@
                 <h4>Ingrese el inventario de hoy {{$today}} </h4>
                 <div class="row justify-between">
                     @forelse($productsAvailable as $product)
-
                         <div class="col-4 p-l-l8">
                             <p class="m-t-24"><b>{{$product->name}}</b></p>
                             <input type="number" placeholder="Disponible"
@@ -43,18 +43,21 @@
                                    value="{{old('available')}}" required
                                    class=" @if ($errors->has('available'))error @endif m-b-16" title="available">
                             @if ($errors->has('name'))<span class="error">{{ $errors->first('name') }}</span>@endif
+
+                            @if($product->see_description)<p>{{$product->description}}</p> @endif
                             <input type="number" id="name"
                                    name="products[{{$product->id}}][sold]"
                                    value="{{old('name')}}"
                                    placeholder="Vendido" required
                                    @if ($errors->has('name')) class="error" @endif>
                             @if ($errors->has('name'))<span class="error">{{ $errors->first('name') }}</span>@endif
+
                         </div>
                     @empty
                         <p>Este punto no tiene asignado ningún producto</p>
                     @endforelse
                 </div>
-                <div class="m-t-24">
+                <div class="m-t-24  m-b-24">
                     <button class="is-full-width">Agregar inventario</button>
                 </div>
             </div>

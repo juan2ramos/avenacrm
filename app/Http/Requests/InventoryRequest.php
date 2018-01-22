@@ -13,7 +13,7 @@ class InventoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class InventoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'products.*.produced' => 'required|numeric',
+            'products.*.dispatched' => 'required|numeric'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'products.*.produced.required' => 'El elemento es requerido',
+            'products.*.produced.numeric' => 'Debe ser un número',
+            'products.*.dispatched.required' => 'El elemento es requerido',
+            'products.*.dispatched.numeric' => 'Debe ser un número',
         ];
     }
 }

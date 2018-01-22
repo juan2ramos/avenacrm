@@ -27,12 +27,11 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-
-        return view('home.home',
-            [
+        session()->flash('date',Carbon::now()->toDateString());
+        return view('home.home', [
                 'points' => Point::has('stockDay')->get(),
                 'today' => Carbon::now()->formatLocalized('%A %d de %B %Y'),
-                'pointAll' => Point::count()
+                'pointAll' => Point::count(),
             ]);
     }
 
@@ -51,7 +50,8 @@ class HomeController extends Controller
     public function homePoint()
     {
         $products = auth()->user()->assign->stockDay;
-        if (!$products->isEmpty()) {
+        session()->flash('date',Carbon::now()->toDateString());
+        if (! $products->isEmpty()) {
             return view('home.point', [
                 'products' => $products,
                 'productsAvailable' => auth()->user()->assign->productsAvailable,

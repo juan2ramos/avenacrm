@@ -29,7 +29,6 @@ class HomeController extends Controller
     {
         $pc = new PointController();
         return $pc->pointDetailDate(Carbon::now()->toDateString());
-
     }
 
     /**
